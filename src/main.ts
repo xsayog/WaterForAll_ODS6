@@ -1,16 +1,9 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
-@Schema()
-export class WaterUsage extends Document {
-  @Prop({ required: true })
-  userId: string;
-
-  @Prop({ required: true })
-  amount: number;
-
-  @Prop({ required: true })
-  readingDate: Date;
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.listen(3000);
+  console.log('Application is running on: http://localhost:3000');
 }
-
-export const WaterUsageSchema = SchemaFactory.createForClass(WaterUsage);
+bootstrap();
